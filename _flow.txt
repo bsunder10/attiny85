@@ -1,0 +1,16 @@
+first generate the a.out file
+avr-gcc -Os -mmcu=attiny85 test.c
+
+Conver the a.out to hex file
+avr-objcopy -O ihex -j .text -j .data a.out a.hex
+
+To check the connection
+avrdude C:\Users\Sunder\Downloads\avrdude-6.4-mingw32\avrdude.conf -v -p t85 -B 10 -c usbasp 
+
+Set Fuse to 0xE2
+avrdude C:\Users\Sunder\Downloads\avrdude-6.4-mingw32\avrdude.conf -v -p t85 -B 10 -c usbasp -U lfuse:w:0xE2:m
+
+Flash the hex
+avrdude C:\Users\Sunder\Downloads\avrdude-6.4-mingw32\avrdude.conf -v -p t85 -B 10 -c usbasp -U flash:w:a.hex:i
+
+avrdude C:\Users\Sunder\Downloads\avrdude-6.4-mingw32\avrdude.conf -v -p t85 -B 1000 -c usbasp -U flash:w:a.hex:i
